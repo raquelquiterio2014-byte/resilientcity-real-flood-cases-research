@@ -63,6 +63,17 @@ Import the original French dossiers and prepare source-backed international doss
 
 See `data/evidence_template.json` for the schema; its example URL is a placeholder, not a source. No measurements, event outcomes or source citations have been invented to complete this list.
 
+## Internet evidence research — 10 October 2026
+
+An initial source-discovery pass produced **10 research dossiers and 24 source records**:
+
+- [Research report in Portuguese](docs/RESEARCH_EVIDENCE_PT_BR.md): source links, dates, access limitations and case-specific gaps.
+- [Structured research dossiers](data/research_dossiers.json): staging data with source roles and unknown timestamps represented as null.
+
+Nancy's municipal history identifies the night of 21–22 May 2012; ICIMOD identifies the Rasuwa event on 26 August 2026. Gard/Hérault still needs a unique episode and catchment because multiple October 2024 episodes were found.
+
+These files are **research staging artifacts, not GUI-importable case inputs**. They do not change the executable catalogue or enable LLM analysis. Original publication times and historical availability must be established before converting source candidates into admitted evidence. Sources read only through search metadata or blocked during retrieval are explicitly labelled. Retrospective validation remains pending for all ten cases.
+
 ## Validation scope
 Automated tests cover cutoff leakage, duplicate IDs, malformed timestamps, unknown citations, downstream state, abstention, API fallback and no automatic approval. Mocked Gemini tests prove integration flow only, not provider behavior or factual quality. GUI visual execution and a live Gemini request must be validated on the user's computer. Dependency range is not a lockfile; record the installed SDK version during live validation.
 
