@@ -1,0 +1,11 @@
+[
+  {
+    "incident_id": "FR-62-20231106-001",
+    "title": "Pas-de-Calais — Aa River — November 2023",
+    "location": "Pas-de-Calais, Aa River, France",
+    "evidence_cutoff": "2023-11-06T08:00:00Z",
+    "validation_status": "real French cases received — retrospective validation pending",
+    "notes": "User-provided event identifier and cutoff. Original full dossier has not yet been imported into this independent project.",
+    "evidence": []
+  }
+]

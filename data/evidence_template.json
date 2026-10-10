@@ -1,0 +1,20 @@
+{
+  "incident_id": "REPLACE-ME",
+  "title": "Case title",
+  "location": "Location",
+  "evidence_cutoff": "2023-11-06T08:00:00Z",
+  "validation_status": "real case received \u2014 retrospective validation pending",
+  "evidence": [
+    {
+      "id": "E001",
+      "url": "https://example.org/replace-with-source",
+      "publisher": "Replace with publisher",
+      "published_at": "2023-11-06T07:00:00Z",
+      "available_at": "2023-11-06T07:00:00Z",
+      "excerpt": "Replace with a short source excerpt or clearly labelled transcription.",
+      "verified": false,
+      "verified_by": "",
+      "verification_notes": "Record who checked the source, original publication time and archival availability."
+    }
+  ]
+}
