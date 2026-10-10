@@ -24,10 +24,11 @@ def timestamp(value):
     return dt
 
 def validate_case(case):
-    for name in ('incident_id', 'title', 'location', 'evidence_cutoff'):
+    for name in ('incident_id', 'title', 'location'):
         if not isinstance(case.get(name), str) or not case[name].strip():
             raise ValueError('Required field: ' + name)
-    timestamp(case['evidence_cutoff'])
+    if case.get('evidence_cutoff') is not None:
+        timestamp(case['evidence_cutoff'])
     if not isinstance(case.get('evidence', []), list):
         raise ValueError('evidence must be a list')
     seen = set()
@@ -45,9 +46,14 @@ def validate_case(case):
             raise ValueError('available_at cannot precede published_at')
         if e.get('verified', False) not in (True, False):
             raise ValueError('verified must be boolean')
+    if not isinstance(case.get('sources', []), list):
+        raise ValueError('sources must be a list')
     return case
 
 def partition(case):
+    if case.get('evidence_cutoff') is None:
+        return [], [{'id': e['id'], 'reasons': ['evidence cutoff not selected']}
+                    for e in case.get('evidence', [])]
     cutoff = timestamp(case['evidence_cutoff'])
     admitted, excluded = [], []
     for e in case.get('evidence', []):
@@ -131,7 +137,7 @@ class Engine:
             with (folder / 'trace.jsonl').open('a', encoding='utf-8') as f:
                 f.write(json.dumps(entry, ensure_ascii=False) + '\n')
         state = {'incident_id': case['incident_id'], 'location': case['location'],
-                 'evidence_cutoff': case['evidence_cutoff'], 'evidence': evidence, 'agents': {}}
+                 'evidence_cutoff': case.get('evidence_cutoff'), 'evidence': evidence, 'agents': {}}
         degraded = False
         gateway = self.gateway
         owned = False
@@ -155,6 +161,7 @@ class Engine:
                 state['agents'][role] = result
                 log(role, result)
             issues = []
+            if case.get('evidence_cutoff') is None: issues.append('Evidence cutoff pending researcher selection')
             if not evidence: issues.append('No verified evidence available by cutoff')
             if self.mode == 'offline': issues.append('Offline workflow test; no LLM analysis')
             if degraded: issues.append('API failure; conservative fallback used')
@@ -165,7 +172,7 @@ class Engine:
                     'human_review': 'pending', 'validation_status': STATUS}
             log('Safety', gate)
             log('HumanGate', {'state': 'pending', 'automatic_approval': False})
-            report = {'project': 'ResilientCity AI — Real Flood Cases Research', 'version': '0.1.0',
+            report = {'project': 'ResilientCity AI — Real Flood Cases Research', 'version': '0.2.0',
                       'run_id': run_id, 'mode': self.mode,
                       'model': getattr(gateway, 'model', None) if self.mode == 'gemini' else None,
                       'case': case, 'input_sha256': hashlib.sha256(json.dumps(case, sort_keys=True).encode()).hexdigest(),

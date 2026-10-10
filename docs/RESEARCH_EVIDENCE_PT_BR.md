@@ -140,3 +140,7 @@ Uma data de corte durante a enchente permite estudar resposta ao evento; isso n�
 ## Próximo passo técnico
 
 Selecionar o objetivo e o corte de cada caso; recuperar originais/arquivos históricos; converter somente evidências temporalmente admissíveis para o schema de `data/evidence_template.json`. Conservar um conjunto separado de resultados posteriores para avaliação. Apenas depois executar Gemini, revisar criticamente e medir resultados.
+
+## Integração na versão 0.2
+
+Os dez dossiês agora têm cadastros correspondentes no seletor da interface. O arquivo de pesquisa continua sendo um registro de preparação; suas fontes não são admitidas automaticamente como evidência. Os cadastros podem ser editados e salvos com **Register / update**. Nove datas de corte permanecem pendentes.

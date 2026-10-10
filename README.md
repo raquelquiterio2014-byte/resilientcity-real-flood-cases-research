@@ -1,5 +1,5 @@
 # ResilientCity AI — Real Flood Cases Research
-Author: Raquel Cruz • Version 0.1.0
+Author: Raquel Cruz • Version 0.2.0
 
 Independent research prototype for retrospective flood-case analysis. No imports, writes or dependency on V6. V6 remains the synthetic-scenario project. This is a new implementation inspired by the agreed roles, not a verified copy of V6 internals.
 
@@ -40,28 +40,33 @@ Each run creates `outputs/<run_id>/report.json`, `report.md` and real `trace.jso
 
 The research list contains **10 previously identified cases: 3 French cases and 7 international candidates**. Locations and periods below preserve the earlier research shortlist; they are **provisional dossier labels, not independently verified event metadata**. Source verification, evidence-cutoff selection and retrospective tests remain pending for every case.
 
-| # | Case / location | Country | Period recorded in the research shortlist | Research status | Available in the v0.1 catalogue |
+| # | Case / location | Country | Period recorded in the research shortlist | Research status | Available in the v0.2 catalogue |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Pas-de-Calais — Aa River | France | November 2023 | Real French case received — retrospective validation pending | Seed record only; verified evidence not imported |
-| 2 | Gard / Hérault | France | October 2024 | Real French case received — retrospective validation pending | No — original dossier import pending |
-| 3 | Nancy | France | May 2012 | Real French case received — retrospective validation pending | No — original dossier import pending |
-| 4 | Porto Alegre | Brazil | May 2024 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 5 | Ahr Valley | Germany | July 2021 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 6 | Sindh | Pakistan | 2022 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 7 | Rasuwa — Bhote Koshi and Trishuli rivers | Nepal | August 2026 — provisional; exact event date and geographic scope require verification | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 8 | Valencia | Spain | 2024 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 9 | Texas — Guadalupe River | United States | 2025 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
-| 10 | Derna | Libya | 2023 | International research candidate — source verification and retrospective validation pending | No — dossier preparation pending |
+| 1 | Pas-de-Calais — Aa River | France | November 2023 | Real French case received — retrospective validation pending | Registered; verified evidence not imported |
+| 2 | Gard / Hérault | France | October 2024 | Real French case received — retrospective validation pending | Registered; original evidence import pending |
+| 3 | Nancy | France | May 2012 | Real French case received — retrospective validation pending | Registered; original evidence import pending |
+| 4 | Porto Alegre | Brazil | May 2024 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 5 | Ahr Valley | Germany | July 2021 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 6 | Sindh | Pakistan | 2022 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 7 | Rasuwa — Bhote Koshi and Trishuli rivers | Nepal | August 2026 — provisional; exact event date and geographic scope require verification | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 8 | Valencia | Spain | 2024 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 9 | Texas — Guadalupe River | United States | 2025 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
+| 10 | Derna | Libya | 2023 | International research candidate — source verification and retrospective validation pending | Registered; evidence preparation pending |
 
 **Listing a case does not mean the system has analysed or validated it.** The three French cases retain the collective status **“real French cases received — retrospective validation pending”**. The seven international cases remain research candidates; no execution or source validation is claimed.
 
-## Case catalogue and migration
+## Registered case catalogue — v0.2
 
-Only the user-provided Pas-de-Calais ID `FR-62-20231106-001` and cutoff `2023-11-06T08:00:00Z` are seeded in `data/catalog.json`; its original full dossier and verified evidence have not been imported. The other nine cases listed above are documented research targets, not selectable cases in the current GUI.
+All ten cases are selectable in the GUI from `data/catalog.json`. The catalogue includes 24 source candidates, event periods, missing-data notes and pending-validation labels. These registrations do not imply executed analysis or verified evidence.
 
-Import the original French dossiers and prepare source-backed international dossiers before adding them to the executable catalogue. Each dossier requires an incident ID, a justified evidence cutoff, source publisher/URL, publication and availability timestamps, excerpts, and manual provenance checks. Review provisional labels against sources, especially the Nepal event date and river/locality scope.
+- `Sources & registration` displays source URLs, access limitations and missing fields.
+- `Register / update` saves the edited case to the local catalogue by incident ID, adding a new registration or updating an existing one. Saving does not approve evidence or validate the event.
+- `Export case` writes an individual JSON for later import.
+- Nine cases have `evidence_cutoff: null`; Pas-de-Calais preserves the supplied cutoff `2023-11-06T08:00:00Z`. Pending cutoff is permitted for registration and yields a BLOCKED report without API calls.
+- `sources` contains research metadata only and is never passed to Gemini. Only manually verified, temporally admissible entries in `evidence` may be admitted. All ten initial evidence lists are empty.
+- Gard/Hérault remains an ambiguous episode pending original dossier identification. The other new incident IDs are project research identifiers, not official authority IDs.
 
-See `data/evidence_template.json` for the schema; its example URL is a placeholder, not a source. No measurements, event outcomes or source citations have been invented to complete this list.
+Use `data/evidence_template.json` to prepare admitted evidence. Unknown publication/availability timestamps remain pending rather than being replaced with event dates. Local registration changes are saved in the project folder, not automatically pushed to GitHub.
 
 ## Internet evidence research — 10 October 2026
 
@@ -72,7 +77,7 @@ An initial source-discovery pass produced **10 research dossiers and 24 source r
 
 Nancy's municipal history identifies the night of 21–22 May 2012; ICIMOD identifies the Rasuwa event on 26 August 2026. Gard/Hérault still needs a unique episode and catchment because multiple October 2024 episodes were found.
 
-These files are **research staging artifacts, not GUI-importable case inputs**. They do not change the executable catalogue or enable LLM analysis. Original publication times and historical availability must be established before converting source candidates into admitted evidence. Sources read only through search metadata or blocked during retrieval are explicitly labelled. Retrospective validation remains pending for all ten cases.
+These files are **research staging artifacts, not GUI-importable case inputs**. Their source metadata is included in the v0.2 registered catalogue; it does not enable LLM analysis. Original publication times and historical availability must be established before converting source candidates into admitted evidence. Sources read only through search metadata or blocked during retrieval are explicitly labelled. Retrospective validation remains pending for all ten cases.
 
 ## Validation scope
 Automated tests cover cutoff leakage, duplicate IDs, malformed timestamps, unknown citations, downstream state, abstention, API fallback and no automatic approval. Mocked Gemini tests prove integration flow only, not provider behavior or factual quality. GUI visual execution and a live Gemini request must be validated on the user's computer. Dependency range is not a lockfile; record the installed SDK version during live validation.
@@ -83,6 +88,6 @@ Retrospective evaluation still requires frozen pre-cutoff evidence, a separately
 
 Project repository: https://github.com/raquelquiterio2014-byte/resilientcity-real-flood-cases-research
 
-Version 0.1 is published on `main`. Desktop visual validation and a live Gemini request remain pending. Keep private outputs, API keys and virtual environments out of published commits.
+Version 0.2 is published on `main`. Desktop visual validation and a live Gemini request remain pending. Keep private outputs, API keys and virtual environments out of published commits.
 
 SDK reference: https://googleapis.github.io/python-genai/
